@@ -36,7 +36,8 @@ public class ConnectionUtil {
 		{
 			e.printStackTrace();
 			throw new RuntimeException("Unable to connect to the database");
-		}return con;
+		}
+		return con;
 	}
 
 	

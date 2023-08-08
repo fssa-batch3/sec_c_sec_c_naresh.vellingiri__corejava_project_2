@@ -49,18 +49,10 @@ public class ShareToRiseDao {
 
 	public static boolean updateTask(FundingRaiser fundingRaiser) throws SQLException {
 
-		if (fundingRaiser == null) {
-			throw new SQLException("Fundraiser object cannot be null");
 
-		}
+		try (Connection con = ConnectionUtil.getConnection()) {
 
-		String url = "jdbc:mysql://localhost:3306/sharetorise";
-		String userName = "root";
-		String password = "123456";
-//		Connection con = null;
-
-		try (Connection con = DriverManager.getConnection(url, userName, password)) {
-			String sql = "UPDATE  fundraiser SET  title=?,description=?,FundingGoal=?,FundEndingDate=?,NoOfDaysRequired=? WHERE personID = ?";
+			String sql = "UPDATE  fundraiser SET  title=?,description=?,FundingGoal=?,FundEndingDate=?,NoOfDaysRequired=?";
 
 			try {
 
@@ -72,7 +64,6 @@ public class ShareToRiseDao {
 				preparedStatement.setObject(4, fundingRaiser.getFundEndingDate());
 				preparedStatement.setInt(5, fundingRaiser.getNoOfDaysRequired());
 
-				preparedStatement.setInt(6, fundingRaiser.getId());
 				preparedStatement.executeUpdate();
 
 			}
@@ -90,13 +81,13 @@ public class ShareToRiseDao {
 	}
 
 	public static void main(String[] args) throws SQLException {
-		FundingRaiser fundraiser = new FundingRaiser();
-
-		fundraiser.setDescription("A great project description");
-		fundraiser.setFundEndingDate(LocalDate.of(2023, 12, 31));
-		fundraiser.setFundingGoal(5000.0);
-		fundraiser.setNoOfDaysRequired(77);
-		fundraiser.setTitle("Project XYZ");
+//		FundingRaiser fundraiser = new FundingRaiser();
+//
+//		fundraiser.setDescription("A great project description");
+//		fundraiser.setFundEndingDate(LocalDate.of(2023, 12, 31));
+//		fundraiser.setFundingGoal(5000.0);
+//		fundraiser.setNoOfDaysRequired(77);
+//		fundraiser.setTitle("Project XYZ");
 
 	}
 }
