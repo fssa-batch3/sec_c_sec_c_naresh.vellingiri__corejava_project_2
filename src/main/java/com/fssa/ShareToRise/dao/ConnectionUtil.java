@@ -30,7 +30,7 @@ public class ConnectionUtil {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url, userName, passWord);
 			
-			System.out.println("Hi Denny");
+			System.out.println("Connected");
 		}catch(
 		Exception e)
 		{

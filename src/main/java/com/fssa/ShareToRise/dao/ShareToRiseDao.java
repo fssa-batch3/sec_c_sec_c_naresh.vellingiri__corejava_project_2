@@ -1,33 +1,29 @@
 package com.fssa.ShareToRise.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
+import com.fssa.ShareToRise.Exceptions.DAOException;
 import com.fssa.ShareToRise.model.FundingRaiser;
-import com.fssa.ShareToRise.service.UserService;
-import com.fssa.ShareToRise.validator.FundraisingValidator;
 
 
 public class ShareToRiseDao {
 
-	public static boolean createTask(FundingRaiser fundingRaiser) throws SQLException {
+	public static boolean createTask(FundingRaiser fundingRaiser) throws DAOException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
-			String sql = "INSERT INTO fundraiser (personID, Title, Description, FundingGoal, FundEndingDate, NoOfDaysRequired) VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO fundraiser ( Title, Description, FundingGoal, FundEndingDate, NoOfDaysRequired) VALUES (?, ?, ?, ?, ?)";
 
 			try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
 
 				System.out.println("FundingRaiser 2!");
 
-				preparedStatement.setInt(1, fundingRaiser.getId());
-				preparedStatement.setString(2, fundingRaiser.getTitle());
-				preparedStatement.setString(3, fundingRaiser.getDescription());
-				preparedStatement.setDouble(4, fundingRaiser.getFundingGoal());
-				preparedStatement.setObject(5, fundingRaiser.getFundEndingDate());
-				preparedStatement.setInt(6, fundingRaiser.getNoOfDaysRequired());
+				preparedStatement.setString(1, fundingRaiser.getTitle());
+				preparedStatement.setString(2, fundingRaiser.getDescription());
+				preparedStatement.setDouble(3, fundingRaiser.getFundingGoal());
+				preparedStatement.setObject(4, fundingRaiser.getFundEndingDate());
+				preparedStatement.setInt(5, fundingRaiser.getNoOfDaysRequired());
 
 				preparedStatement.executeUpdate();
 
@@ -42,12 +38,12 @@ public class ShareToRiseDao {
 			return true;
 
 		} catch (SQLException ex) {
-			throw new SQLException("Connection is not created");
+			throw new DAOException("Connection is not created");
 		}
 
 	}
 
-	public static boolean updateTask(FundingRaiser fundingRaiser) throws SQLException {
+	public static boolean updateTask(FundingRaiser fundingRaiser) throws DAOException {
 
 
 		try (Connection con = ConnectionUtil.getConnection()) {
@@ -75,7 +71,7 @@ public class ShareToRiseDao {
 			return true;
 
 		} catch (SQLException ex) {
-			throw new SQLException("Connection is not created");
+			throw new DAOException("Connection is not created");
 		}
 
 	}
