@@ -1,4 +1,4 @@
-package com.fssa.ShareToRise.Exceptions;
+package com.fssa.sharetorise.exceptions;
 
 public class DAOException extends RuntimeException{
 	

@@ -1,7 +1,6 @@
-package com.fssa.ShareToRise.model;
+package com.fssa.sharetorise.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 /*
  * 
@@ -10,7 +9,6 @@ import java.util.List;
  * */
 public class FundingRaiser {
 
-	private int id;
 
 	private String title;
 
@@ -30,9 +28,8 @@ public class FundingRaiser {
 
 	}
 
-	public FundingRaiser(int id, String title, String description, double fundingGoal, LocalDate fundEndingDate,
+	public FundingRaiser(String title, String description, double fundingGoal, LocalDate fundEndingDate,
 			int noOfDaysRequired) {
-		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.fundingGoal = fundingGoal;
@@ -40,13 +37,7 @@ public class FundingRaiser {
 		this.noOfDaysRequired = noOfDaysRequired;
 	}
 
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	// creating Getters and Setters for this method
 	public String getTitle() {

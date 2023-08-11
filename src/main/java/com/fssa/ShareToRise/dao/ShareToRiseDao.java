@@ -1,16 +1,18 @@
-package com.fssa.ShareToRise.dao;
+package com.fssa.sharetorise.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.fssa.ShareToRise.Exceptions.DAOException;
-import com.fssa.ShareToRise.model.FundingRaiser;
+import com.fssa.sharetorise.exceptions.DAOException;
+import com.fssa.sharetorise.model.FundingRaiser;
+import com.fssa.sharetorise.util.ConnectionUtil;
 
 
 public class ShareToRiseDao {
+	
 
-	public static boolean createTask(FundingRaiser fundingRaiser) throws DAOException {
+	public static boolean createFundraiser(FundingRaiser fundingRaiser) throws DAOException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 			String sql = "INSERT INTO fundraiser ( Title, Description, FundingGoal, FundEndingDate, NoOfDaysRequired) VALUES (?, ?, ?, ?, ?)";
@@ -43,16 +45,15 @@ public class ShareToRiseDao {
 
 	}
 
-	public static boolean updateTask(FundingRaiser fundingRaiser) throws DAOException {
+	public static boolean updateUpdateFundraiser(FundingRaiser fundingRaiser) throws DAOException {
 
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
 			String sql = "UPDATE  fundraiser SET  title=?,description=?,FundingGoal=?,FundEndingDate=?,NoOfDaysRequired=?";
 
-			try {
+			try(PreparedStatement preparedStatement = con.prepareStatement(sql))  {
 
-				PreparedStatement preparedStatement = con.prepareStatement(sql);
 
 				preparedStatement.setString(1, fundingRaiser.getTitle());
 				preparedStatement.setString(2, fundingRaiser.getDescription());
@@ -77,13 +78,6 @@ public class ShareToRiseDao {
 	}
 
 	public static void main(String[] args) throws SQLException {
-//		FundingRaiser fundraiser = new FundingRaiser();
-//
-//		fundraiser.setDescription("A great project description");
-//		fundraiser.setFundEndingDate(LocalDate.of(2023, 12, 31));
-//		fundraiser.setFundingGoal(5000.0);
-//		fundraiser.setNoOfDaysRequired(77);
-//		fundraiser.setTitle("Project XYZ");
 
 	}
 }

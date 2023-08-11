@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.fssa.ShareToRise</groupId>
-  <artifactId>ShareToRise</artifactId>
+  <groupId>com.fssa.sharetorise</groupId>
+  <artifactId>sharetorise</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>ShareToRise</name>
+  <name>sharetorise</name>
+  
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-
 		<sonar.projectKey>fssa-batch3_sec_c_sec_c_naresh.vellingiri__corejava_project_2</sonar.projectKey>
 		<sonar.organization>fssa-batch3</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -123,10 +123,5 @@
 
 
 
-
-
-
-
-
-
+  
 </project>
