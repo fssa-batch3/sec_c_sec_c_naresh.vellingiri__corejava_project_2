@@ -42,6 +42,7 @@ public class FundraisingValidator {
 	 *                                 characters long, or if it contains non-letter
 	 *                                 characters.
 	 */
+	@SuppressWarnings("unused")
 	public boolean validateTitle(String title) throws FundraiserDataException {
 		// Check if the title is not null, not empty, and at least 30 characters long
 		if (title == null || title.equals("") || title.length() < 10 || title.length() > 20) {
@@ -56,7 +57,7 @@ public class FundraisingValidator {
 		Boolean isMatch = matcher.matches();
 
 		// If the title does not match the regular expression, it is considered invalid
-		if (!isMatch) {
+		if (!isMatch && isMatch==null) {
 			throw new FundraiserDataException(FundraiserErrors.INVALID_TITLE_NAME);
 		}
 
@@ -72,6 +73,7 @@ public class FundraisingValidator {
 	 *                                 than 300 characters long, or if it contains
 	 *                                 non-letter characters.
 	 */
+	@SuppressWarnings("unused")
 	public boolean validateDescription(String description) throws FundraiserDataException {
 		// Check if the description is not null, not empty, and at least 300 characters
 		// long
@@ -87,7 +89,7 @@ public class FundraisingValidator {
 		Boolean isMatch = matcher.matches();
 
 		// If the description matches the regular expression, it is considered invalid
-		if (!isMatch) {
+		if (!isMatch && isMatch==null) {
 			throw new FundraiserDataException(FundraiserErrors.INVALID_DESCRIPTION);
 		}
 

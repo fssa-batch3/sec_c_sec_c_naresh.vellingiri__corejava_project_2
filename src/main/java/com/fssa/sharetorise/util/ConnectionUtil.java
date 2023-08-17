@@ -3,6 +3,8 @@ package com.fssa.sharetorise.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import com.fssa.sharetorise.exceptions.DAOException;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 
@@ -34,21 +36,15 @@ public class ConnectionUtil {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url, userName, passWord);
 			
-		}catch(
-		Exception e)
+		}catch(Exception e)
 		{
-			throw new RuntimeException("Unable to connect to the database");
+			throw new DAOException("Unable to connect to the database");
 		}
 		
 		return con;
 	}
 
-	
-	
-	
-	public static void main(String[] args) {
-		Connection conn = getConnection();
-	}
+
 	
 }
 
