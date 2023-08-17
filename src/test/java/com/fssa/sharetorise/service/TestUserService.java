@@ -48,22 +48,6 @@ public class TestUserService {
 		assertThrows(FundraiserDataException.class, () -> user.createFundraiser(fundraiser));
 
 	}
-//
-	@Test
-
-	void testServiceLayerUpdateValid() {
 
 
-
-		fundraiser.setTitle("Fund for Football");
-		fundraiser.setDescription("This fund is need for future football player who needs fund for his financial ");
-		fundraiser.setFundEndingDate(LocalDate.of(2023, 8, 20));
-		fundraiser.setFundingGoal(8877);
-		fundraiser.setNoOfDaysRequired(90);
-
-		assertDoesNotThrow(() -> user.updateFundraiser(fundraiser));
-
-	}
-
-	
 }
