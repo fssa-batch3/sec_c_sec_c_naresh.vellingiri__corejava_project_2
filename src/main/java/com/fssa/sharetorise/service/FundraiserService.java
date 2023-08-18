@@ -18,12 +18,6 @@ public class FundraiserService {
 
 	}
 
-//	public boolean updateFundraiser(FundingRaiser fundraiser) throws  DAOException {
-//
-//		if (validator.validateFundingRaiser(fundraiser))
-//			return dao.updateUpdateFundraiser(fundraiser);
-//		return false;
-//
-//	}
+
 
 }
