@@ -257,13 +257,13 @@ public class TestFundraisingValidation {
 		assertThrows(FundraiserDataException.class, () -> validator.validateFundEndingDate(invalidEndingDate));
 	}
 
-//	@Test
-//	void testValidateFundEndingDateInvalidPastDate() {
-//		// Arrange
-//		LocalDate invalidEndingDate = LocalDate.now().minusDays(1); // Set an ending date in the past
-//
-//		// Act and Assert
-//		assertThrows(FundraiserDataException.class, () -> validator.validateFundEndingDate(invalidEndingDate));
-//	}
+	@Test
+	void testValidateFundEndingDateInvalidPastDate() {
+		// Arrange
+		LocalDate invalidEndingDate = LocalDate.now().minusDays(1); // Set an ending date in the past
+
+		// Act and Assert
+		assertThrows(FundraiserDataException.class, () -> validator.validateFundEndingDate(invalidEndingDate));
+	}
 
 }

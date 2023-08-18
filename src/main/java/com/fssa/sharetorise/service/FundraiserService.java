@@ -10,7 +10,7 @@ public class FundraiserService {
 	FundraisingValidator validator = new FundraisingValidator();
 	ShareToRiseDao dao = new ShareToRiseDao();
 
-	public boolean createFundraiser(FundingRaiser fundraiser) throws FundraiserDataException, DAOException {
+	public boolean createFundraiser(FundingRaiser fundraiser) throws  DAOException {
 
 		if (validator.validateFundingRaiser(fundraiser))
 			return dao.createFundraiser(fundraiser);
@@ -18,12 +18,12 @@ public class FundraiserService {
 
 	}
 
-	public boolean updateFundraiser(FundingRaiser fundraiser) throws FundraiserDataException, DAOException {
-
-		if (validator.validateFundingRaiser(fundraiser))
-			return dao.updateUpdateFundraiser(fundraiser);
-		return false;
-
-	}
+//	public boolean updateFundraiser(FundingRaiser fundraiser) throws  DAOException {
+//
+//		if (validator.validateFundingRaiser(fundraiser))
+//			return dao.updateUpdateFundraiser(fundraiser);
+//		return false;
+//
+//	}
 
 }

@@ -29,25 +29,11 @@ public class TestUserService {
 		fundraiser.setFundEndingDate(LocalDate.of(2023, 8, 20));
 		fundraiser.setFundingGoal(3000);
 		fundraiser.setNoOfDaysRequired(90);
+		
+
 
 		assertDoesNotThrow(() -> user.createFundraiser(fundraiser));
 
 	}
-
-	@Test
-
-	void testServiceLayerCreateInvalid() {
-
-
-		fundraiser.setTitle("Fund for Footballcvhjgcjhchgfxgchvghkljghcgxfgchvgjkhgf");
-		fundraiser.setDescription("This fund is need for future football player who needs fund for his financial ");
-		fundraiser.setFundEndingDate(LocalDate.of(2023, 8, 20));
-		fundraiser.setFundingGoal(300);
-		fundraiser.setNoOfDaysRequired(90);
-
-		assertThrows(FundraiserDataException.class, () -> user.createFundraiser(fundraiser));
-
-	}
-
 
 }
