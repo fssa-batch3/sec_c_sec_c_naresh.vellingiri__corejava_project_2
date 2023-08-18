@@ -14,7 +14,7 @@ public class ShareToRiseDao {
 	public boolean createFundraiser(FundingRaiser fundingRaiser) throws DAOException {
 		
 
-		try (Connection con = ConnectionUtil.getMyConnection()) {
+		try (Connection con = ConnectionUtil.getConnection()) {
 			String sql = "INSERT INTO fundraiser ( Title, Description, FundingGoal, FundEndingDate, NoOfDaysRequired) VALUES (?, ?, ?, ?, ?)";
 
 			try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
