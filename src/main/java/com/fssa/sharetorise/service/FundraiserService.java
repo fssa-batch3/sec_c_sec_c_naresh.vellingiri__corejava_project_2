@@ -1,5 +1,7 @@
 package com.fssa.sharetorise.service;
 
+import java.util.List;
+
 import com.fssa.sharetorise.dao.ShareToRiseDao;
 import com.fssa.sharetorise.exceptions.*;
 import com.fssa.sharetorise.model.FundingRaiser;
@@ -18,6 +20,26 @@ public class FundraiserService {
 
 	}
 
+	
+	public boolean updateFundraiser (FundingRaiser fundraiser) throws  DAOException {
+		
+		if(validator.validateFundingRaiser(fundraiser))
+			return dao.updateFundraiser(fundraiser);
 
+		return false;
+	}
+	
+	
+	public List<FundingRaiser> readAllFundraiser () throws  DAOException {
+		
+		return dao.readAllFundraisers();
+	}
 
+	
+//	public boolean delete (int fundraiserId) throws  DAOException {
+//
+//	if(dao.getAllFundraiserIds().contains(fundraiserId)) {
+//		return dao.readAllFundraisers(fundraiserId);
+//	}
+//	}
 }

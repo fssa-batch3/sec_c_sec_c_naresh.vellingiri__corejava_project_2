@@ -9,9 +9,9 @@ public class FundraiserErrors {
 	
 	public static final String INVALID_DESCRIPTION = "Description can't be null and it should contain minimum of 50 characters length.";
 	
-	public static final String INVALID_DAYS = "Age can't be negative or zero";
+	public static final String INVALID_DAYS = "Days can't be negative or zero";
 	
-	public static final String Funding_Goal = "Amount can't be negative";
+	public static final String Funding_Goal = "Amount can't be negative or less than minimal amount.";
 
 	public static final String Fund_Ending_Date = "Fund ending date cannot be null.";
 

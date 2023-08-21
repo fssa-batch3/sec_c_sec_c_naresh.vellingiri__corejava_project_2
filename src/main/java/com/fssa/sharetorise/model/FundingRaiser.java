@@ -8,6 +8,8 @@ import java.time.LocalDate;
  * 
  * */
 public class FundingRaiser {
+	
+	private int fundraiserId;
 
 	private String title;
 
@@ -18,15 +20,19 @@ public class FundingRaiser {
 	private LocalDate fundEndingDate;
 
 	private int noOfDaysRequired;
-
-//	Creating constructor for all fields
-
+	
+	
 	public FundingRaiser() {
-
+		
+		
 	}
+	
 
-	public FundingRaiser(String title, String description, double fundingGoal, LocalDate fundEndingDate,
-			int noOfDaysRequired) {
+
+	public FundingRaiser(int fundraiserId, String title, String description, double fundingGoal,
+			LocalDate fundEndingDate) {
+		super();
+		this.fundraiserId = fundraiserId;
 		this.title = title;
 		this.description = description;
 		this.fundingGoal = fundingGoal;
@@ -71,8 +77,27 @@ public class FundingRaiser {
 		return noOfDaysRequired;
 	}
 
+	
+
+
+
 	public void setNoOfDaysRequired(int noOfDaysRequired) {
 		this.noOfDaysRequired = noOfDaysRequired;
+	}
+
+	public int getFundraiserId() {
+		return fundraiserId;
+	}
+
+	public void setFundraiserId(int fundraiserId) {
+		this.fundraiserId = fundraiserId;
+	}
+	
+	@Override
+	public String toString() {
+		return "FundingRaiser [fundraiserId=" + fundraiserId + ", title=" + title + ", description=" + description
+				+ ", fundingGoal=" + fundingGoal + ", fundEndingDate=" + fundEndingDate + ", noOfDaysRequired="
+				+ noOfDaysRequired + "]";
 	}
 
 }

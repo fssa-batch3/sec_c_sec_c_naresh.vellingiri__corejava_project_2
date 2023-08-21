@@ -14,7 +14,7 @@ public class TestFundraisingValidation {
 
 	FundraisingValidator validator = new FundraisingValidator();
 
-	FundingRaiser nm = new FundingRaiser(null, null, 0, null, 0);
+	FundingRaiser nm = new FundingRaiser();
 
 	@Test
 	void testValidFundingRaiser() {
@@ -23,11 +23,10 @@ public class TestFundraisingValidation {
 
 		fund.setTitle("Fund for Football");
 		fund.setDescription("This fund is need for future football player who needs fund for his financial ");
-		fund.setFundEndingDate(LocalDate.of(2023, 8, 20));
+		fund.setFundEndingDate(LocalDate.of(2023, 8, 26));
 		fund.setFundingGoal(3000);
-		fund.setNoOfDaysRequired(90);
 
-		assertDoesNotThrow(() -> validator.validateFundingRaiser(fund));
+		assertDoesNotThrow(() -> validator.validateFundingRaiser(fund)); 
 
 	}
 
@@ -161,52 +160,7 @@ public class TestFundraisingValidation {
 		assertThrows(FundraiserDataException.class, () -> validator.validateDescription(invalidDescription));
 	}
 
-//	    //    Test cases for validating int Noofdays attribute
 
-	@Test
-	void testValidateNoOfDaysRequiredValid() {
-		// Arrange
-		int validNoOfDays = 5;
-
-		// Act and Assert
-		assertDoesNotThrow(() -> validator.validateNoOfDaysRequired(validNoOfDays));
-	}
-
-	@Test
-	void testValidateNoOfDaysRequiredInvalidZero() {
-		// Arrange
-		int invalidNoOfDays = 0;
-
-		// Act and Assert
-		assertThrows(FundraiserDataException.class, () -> validator.validateNoOfDaysRequired(invalidNoOfDays));
-	}
-
-	@Test
-	void testValidateNoOfDaysRequiredInvalidNegative() {
-		// Arrange
-		int invalidNoOfDays = -10;
-
-		// Act and Assert
-		assertThrows(FundraiserDataException.class, () -> validator.validateNoOfDaysRequired(invalidNoOfDays));
-	}
-
-	@Test
-	void testValidateNoOfDaysRequiredInvalidTooLarge() {
-		// Arrange
-		int invalidNoOfDays = 150;
-
-		// Act and Assert
-		assertThrows(FundraiserDataException.class, () -> validator.validateNoOfDaysRequired(invalidNoOfDays));
-	}
-
-	@Test
-	void testValidateNoOfDaysRequiredInvalidEdgeCase() {
-		// Arrange
-		int invalidNoOfDays = 120;
-
-		// Act and Assert
-		assertThrows(FundraiserDataException.class, () -> validator.validateNoOfDaysRequired(invalidNoOfDays));
-	}
 
 //	    Test case for this FundingGoal attribute
 

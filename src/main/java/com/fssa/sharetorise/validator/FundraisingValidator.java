@@ -28,7 +28,6 @@ public class FundraisingValidator {
 		validateDescription(fund.getDescription());
 		validateFundingGoal(fund.getFundingGoal());
 		validateFundEndingDate(fund.getFundEndingDate());
-		validateNoOfDaysRequired(fund.getNoOfDaysRequired());
 
 		return true;
 	}
@@ -94,23 +93,7 @@ public class FundraisingValidator {
 		return true;
 	}
 
-	/**
-	 * 
-	 * Validates the number of days required for a fundraiser.
-	 * 
-	 * @param noOfDaysRequired The number of days required to validate.
-	 * @return true if the number of days required is valid.
-	 * @throws FundraiserDataException if the number of days required is less than
-	 *                                 or equal to 0, or greater than or equal to
-	 *                                 120.
-	 */
-	public boolean validateNoOfDaysRequired(int noOfDaysRequired) throws FundraiserDataException {
-		// Check if the number of days required is a positive integer less than 120
-		if (noOfDaysRequired <= 0 || noOfDaysRequired >= 120) {
-			throw new FundraiserDataException(FundraiserErrors.INVALID_DAYS);
-		}
-		return true;
-	}
+
 
 	/**
 	 * Validates the funding goal for a fundraiser.
