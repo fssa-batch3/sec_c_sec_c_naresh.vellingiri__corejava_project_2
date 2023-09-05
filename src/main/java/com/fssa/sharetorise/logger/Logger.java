@@ -1,13 +1,13 @@
 package com.fssa.sharetorise.logger;
 
-public class Logger {
+public  class Logger {
 	
-	public void debug(Object obj) {
+	public static void debug(Object obj) {
 		System.out.println(obj);
 		
 	}
 
-	public void info(Object obj) {
+	public static void info(Object obj) {
 		System.out.println(obj);
 	}
 

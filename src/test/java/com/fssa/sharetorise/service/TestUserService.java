@@ -1,83 +1,59 @@
 package com.fssa.sharetorise.service;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.sql.SQLException;
 
-import java.time.LocalDate;
-import java.util.List;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.sharetorise.dao.ShareToRiseDao;
-import com.fssa.sharetorise.logger.Logger;
-import com.fssa.sharetorise.model.FundingRaiser;
+import com.fssa.sharetorise.exceptions.DAOException;
+import com.fssa.sharetorise.exceptions.InvalidInputException;
+import com.fssa.sharetorise.exceptions.ServiceException;
+import com.fssa.sharetorise.model.User;
 
 public class TestUserService {
 
-	FundraiserService user = new FundraiserService();
+	UserService userService = new UserService();
 
-	FundingRaiser fundraiser = new FundingRaiser();
-	
-	ShareToRiseDao dao    = new ShareToRiseDao();
-	
-	Logger log = new Logger();
-
-	// Test case for service layer
-
+	/**
+	 * Test case for validating the addition of a valid customer using the
+	 * CustomerService's `addCustomer` method. It verifies whether a valid customer
+	 * can be added successfully to the system.
+	 *
+	 * @throws DAOException       If there is an issue with the database operation
+	 *                            during the test.
+	 * @throws ValidatorException If there is an issue with validating the customer
+	 *                            data during the test.
+	 */
 	@Test
+	@Order(1)
+	public void testValidAddUser() {
 
-	void testCreateFundraiser() {
+		User user = new User("Hemanath", "Alagarappu", 9967979733l, "dharun@gmail.com", "1234567890Dh@",
+				"1234567890Dh@");
 
-//    	FundraisingValidator
-
-		fundraiser.setTitle("Fund for harshini");
-		fundraiser.setDescription("This fund is need for future football player who needs fund for his financial ");
-		fundraiser.setFundEndingDate(LocalDate.of(2023, 8, 26));
-		fundraiser.setFundingGoal(3000);
-		
-
-
-		assertDoesNotThrow(() -> user.createFundraiser(fundraiser));
-
-	}
-	
-	
-	
-	
-	@Test
-
-	void testUpdateFundraiser() {
-
-//    	FundraisingValidator
-
-		fundraiser.setTitle("Fund for naresh");
-		fundraiser.setDescription("This fund is need for future football player who needs fund for his financial ");
-		fundraiser.setFundEndingDate(LocalDate.of(2023, 8, 26));
-		fundraiser.setFundingGoal(4321);
-		fundraiser.setFundraiserId(1);
-		
-
-
-		assertDoesNotThrow(() -> user.updateFundraiser(fundraiser));
-
-	}
-	
-	
-	@Test
-	void testReadAllFundraisers() {
-		
-		List<FundingRaiser> fundingRaiserList = user.readAllFundraiser();
-		
-		assertNotNull(fundingRaiserList);
-		assertFalse(fundingRaiserList.isEmpty());
-		
-
-		for(FundingRaiser fundRaiser: fundingRaiserList) {
-			
-			log.info(fundRaiser);
+		try {
+			Assertions.assertTrue(userService.addUser(user));
+		} catch (ServiceException e) {
+			Assertions.fail(e);
 		}
-		
+
+	}
+
+	@Test
+	@Order(2)
+	public void testLogin() {
+
+		try {
+			userService.login("dharun@gmail.com", "1234567890Dh@");
+			System.out.println("Login success");
+		} catch (InvalidInputException | DAOException | SQLException e) {
+			// TODO Auto-generated catch block
+
+			Assertions.fail("Login fails");
+			e.printStackTrace();
+		}
+
 	}
 
 }
