@@ -28,7 +28,7 @@ public class ShareToRiseDAO {
 
 			try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-				preparedStatement.setString(1, fundingRaiser.getTitle());
+				preparedStatement.setString(1, fundingRaiser.getTitle()); 
 				preparedStatement.setString(2, fundingRaiser.getDescription());
 				preparedStatement.setDouble(3, fundingRaiser.getFundingGoal());
 				preparedStatement.setDate(4, java.sql.Date.valueOf(fundingRaiser.getFundEndingDate()));
