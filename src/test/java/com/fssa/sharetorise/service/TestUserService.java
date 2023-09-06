@@ -27,9 +27,9 @@ public class TestUserService {
 	 */
 	@Test
 	@Order(1)
-	public void testValidAddUser() {
+	 void testValidAddUser() {
 
-		User user = new User("Hemanath", "Alagarappu", 9967979733l, "dharun@gmail.com", "1234567890Dh@",
+		User user = new User("Hemanath", "v", 9442353114l, "dharun@gmail.com", "1234567890Dh@",
 				"1234567890Dh@");
 
 		try {
@@ -42,7 +42,7 @@ public class TestUserService {
 
 	@Test
 	@Order(2)
-	public void testLogin() {
+	 void testLogin() {
 
 		try {
 			userService.login("dharun@gmail.com", "1234567890Dh@");

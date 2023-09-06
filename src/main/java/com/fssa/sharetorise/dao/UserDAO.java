@@ -64,9 +64,9 @@ public class UserDAO {
 	 * @throws SQLException If there is an issue with executing the SQL query.
 	 */
 
-	public static boolean logInUser(String email, String password) throws DAOException, SQLException {
+	public static User logInUser(String email, String password) throws DAOException, SQLException {
 
-		final String query = "SELECT email,password FROM users WHERE email = ? AND password=? ";
+		final String query = "SELECT * FROM users WHERE email = ? AND password=? ";
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
@@ -80,7 +80,16 @@ public class UserDAO {
 
 					if (rs.next()) {
 
-							return true;
+						User user= new User();
+						user.setFirstName(rs.getString("first_name"));
+						user.setLastName(rs.getString("last_name"));
+						user.setPhoneNumber(rs.getLong("phone"));
+						user.setEmail(rs.getString("email"));
+						user.setPassword(rs.getString("password"));
+						user.setActive(rs.getBoolean("is_active"));
+						user.setCustomerId(rs.getInt("customer_id"));
+						
+							return user;
 					}
 				}
 			}
@@ -90,8 +99,9 @@ public class UserDAO {
 
 			throw new DAOException(UserDAOError.INVALID_DATA);
 		}
-
-		return false;
+		return null;
+		
+		
 	}
 	
 	
@@ -142,11 +152,7 @@ public class UserDAO {
 		return false;
 	}
 
-	public static void main(String[] args) throws DAOException {
-
-		System.out.println(getUserDetailsByPhoneNumber(9361320511l));
-	}
-
+	
 	public static List<User> getUserDetailsByPhoneNumber(long phone) throws DAOException {
 
 		List<User> userList = new ArrayList<>();
@@ -158,7 +164,6 @@ public class UserDAO {
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 
 				pst.setLong(1, phone);
-				System.out.println(pst);
 				try (ResultSet rs = pst.executeQuery()) {
 
 					if (rs.next()) {
@@ -172,7 +177,6 @@ public class UserDAO {
 						user.setActive(rs.getBoolean("is_active"));
 						user.setCustomerId(rs.getInt("customer_id"));
 						userList.add(user);
-						return userList;
 					}
 				}
 			}
@@ -183,7 +187,7 @@ public class UserDAO {
 			throw new DAOException(UserDAOError.INVALID_DATA);
 		}
 
-		return null;
+		return userList;
 
 	}
 }

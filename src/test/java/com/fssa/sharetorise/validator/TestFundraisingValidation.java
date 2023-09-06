@@ -30,7 +30,7 @@ public class TestFundraisingValidation {
 		FundRaiser fund = new FundRaiser();
 		
 
-		fund.setTitle("Fund for Prathiusha");
+		fund.setTitle("Fund for Football");
 		fund.setDescription("This fund is need for future football player who needs fund for his financial ");
 		fund.setFundEndingDate(LocalDate.of(2023, 9, 26));
 		fund.setFundingGoal(3000);

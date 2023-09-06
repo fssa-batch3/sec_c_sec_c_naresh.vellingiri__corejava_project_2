@@ -45,13 +45,7 @@ public class ConnectionUtil {
 	
 	
 
-//	public static Connection getMyConnection() throws SQLException {
-//		String DB_URL = "jdbc:mysql://localhost:3306/sharetorise";
-//		String DB_USER = "root";
-//		String DB_PASS = "123456";
-//
-//		return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-//	}
+
 	
 	
 

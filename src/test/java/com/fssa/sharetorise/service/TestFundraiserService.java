@@ -19,9 +19,9 @@ import com.fssa.sharetorise.logger.Logger;
 import com.fssa.sharetorise.model.Certificate;
 import com.fssa.sharetorise.model.FundRaiser;
 
-public class TestFundraiserService {
+ class TestFundraiserService {
 
-	FundraiserService user = new FundraiserService(); 
+	FundraiserService user = new FundraiserService();
 
 	ShareToRiseDAO dao = new ShareToRiseDAO();
 
@@ -31,7 +31,6 @@ public class TestFundraiserService {
 
 	@Test
 
-	
 	void testCreateFundraiser() {
 
 		FundRaiser fund = new FundRaiser();
@@ -56,7 +55,6 @@ public class TestFundraiserService {
 
 	}
 
-	
 	@Test
 
 	void testUpdateFundraiser() {
@@ -64,11 +62,11 @@ public class TestFundraiserService {
 //    	FundraisingValidator
 		FundRaiser fund = new FundRaiser();
 
-		fund.setTitle("Cricket Clubs");
+		fund.setTitle("Youth Cricket Match");
 		fund.setDescription("This fund is need for future football player who needs fund for his financial ");
 		fund.setFundEndingDate(LocalDate.of(2023, 9, 26));
 		fund.setFundingGoal(20000);
-		fund.setImageUrl("https://www.kasandbox.org/programming-images/avatars/spunky-sam.png");
+		fund.setImageUrl("https://freeimghost.net/images/2023/05/22/kohli_img.jpeg");
 
 		List<Certificate> certificates = new ArrayList<>();
 		certificates.add(
@@ -77,7 +75,7 @@ public class TestFundraiserService {
 				.add(new Certificate("h647jfn", "https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
 
 		fund.setCertificate(certificates);
-		assertDoesNotThrow(() -> user.updateFundraiser(fund, 2));
+		assertDoesNotThrow(() -> user.updateFundraiser(fund, 1));
 
 	}
 
@@ -103,14 +101,14 @@ public class TestFundraiserService {
 
 	}
 
-	@Test
+	
 
+	@Test
 	void testDeleteFundraiser() {
 
-		FundRaiser fund = new FundRaiser();
+		assertDoesNotThrow(() -> user.deleteCertificates(5));
 
-		assertDoesNotThrow(() -> user.deleteCertificates(3));
-		assertDoesNotThrow(() -> user.deleteFundRaiser(3));
+		assertDoesNotThrow(() -> user.deleteFundRaiser(5));
 
 	}
 

@@ -1,8 +1,8 @@
 package com.fssa.sharetorise.model;
 
 import java.time.LocalDate;
+
 import java.util.List;
-import java.util.Set;
 
 /*
  * 
@@ -27,6 +27,7 @@ public class FundRaiser {
 
 	public FundRaiser() {
 
+		//Private constructor
 	}
 
 

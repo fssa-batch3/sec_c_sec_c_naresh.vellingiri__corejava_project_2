@@ -6,10 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.fssa.sharetorise.exceptions.DAOException;
 import com.fssa.sharetorise.model.Certificate;
@@ -74,9 +72,8 @@ public class ShareToRiseDAO {
 
 				// Assuming you have a method to get the
 				// fundraising_id
-
-				int rowsAffected = preparedStatement.executeUpdate();
-
+				preparedStatement.executeUpdate();
+				
 			}
 
 			updateCertificates(fundingRaiser.getCertificate(), id);
@@ -98,7 +95,6 @@ public class ShareToRiseDAO {
 				for (Certificate ele : certificate) {
 
 					preparedStatement.setInt(1, fundraiser_id);
-					System.out.println("number---------------"+ele.getCerNum());
 					preparedStatement.setString(2, ele.getCerNum());
 					preparedStatement.setString(3, ele.getCerUrl());
 
@@ -253,24 +249,21 @@ public class ShareToRiseDAO {
 	}
 
 	public boolean deleteCertificates(int id) throws DAOException {
-
 		try (Connection con = ConnectionUtil.getConnection()) {
-
 			String sql = "DELETE FROM certificates WHERE fundraiser_id = ?";
-
 			try (PreparedStatement pst = con.prepareStatement(sql)) {
-
+				System.out.println(sql);
+				System.out.println(id);
 				pst.setInt(1, id);
-
-				int rows = pst.executeUpdate();
+				System.out.println(sql);
+				
+				pst.executeUpdate();
 
 		
 			}
 		} catch (SQLException e) {
-
 			throw new DAOException("Failed to delete the certificates." + e.getMessage());
 		}
-
 		return true;
 	}
 }

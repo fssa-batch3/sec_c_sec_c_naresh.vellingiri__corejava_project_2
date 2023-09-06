@@ -31,34 +31,27 @@ public class UserService {
 				
 			}
 
-		} catch (InvalidInputException e) {
+		} catch (InvalidInputException | DAOException e) {
 
 			e.getMessage();
 			throw new ServiceException(e.getMessage());
 
 		} 
-		
-
-		catch (DAOException e) {
-			e.getMessage();
-			throw new ServiceException(e.getMessage());
-		}
 
 		return false;
 	}
 
 	
-	public boolean login(String email, String password) throws InvalidInputException, DAOException, SQLException {
+	public User login(String email, String password) throws InvalidInputException, DAOException, SQLException {
+		
         UserDAO userDAO = new UserDAO();
 
         if(UserValidator.validateEmail(email) && UserValidator.validatePassword(password))
+        	 
             return userDAO.logInUser(email, password);
 
-        return false;
+        return null;
+        
 	}
-		
-		
-		
-	
 	
 }
