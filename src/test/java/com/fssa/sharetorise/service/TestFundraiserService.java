@@ -106,9 +106,9 @@ import com.fssa.sharetorise.model.FundRaiser;
 	@Test
 	void testDeleteFundraiser() {
 
-		assertDoesNotThrow(() -> user.deleteCertificates(15));
+		assertDoesNotThrow(() -> user.deleteCertificates(16));
 
-		assertDoesNotThrow(() -> user.deleteFundRaiser(15));
+		assertDoesNotThrow(() -> user.deleteFundRaiser(16));
 
 	}
 
