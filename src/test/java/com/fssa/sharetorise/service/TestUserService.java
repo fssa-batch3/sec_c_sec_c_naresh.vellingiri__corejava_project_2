@@ -29,7 +29,7 @@ public class TestUserService {
 	@Order(1)
 	 void testValidAddUser() {
 
-		User user = new User("Hemanath", "v", 9442353114l, "dharun@gmail.com", "1234567890Dh@",
+		User user = new User("Naresh", "v", 9442353118l, "dharun@gmail.com", "1234567890Dh@",
 				"1234567890Dh@");
 
 		try {

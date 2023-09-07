@@ -37,7 +37,7 @@ import com.fssa.sharetorise.model.FundRaiser;
 
 //    	FundraisingValidator 
 
-		fund.setTitle("Football Club");
+		fund.setTitle("Football Clubs");
 		fund.setDescription("This fund is need for future player who needs fund for his financial ");
 		fund.setFundEndingDate(LocalDate.of(2023, 9, 26));
 		fund.setImageUrl("https://staticg.sportskeeda.com/Football+wallpapers/CR7/cr7.jpg");
@@ -106,9 +106,9 @@ import com.fssa.sharetorise.model.FundRaiser;
 	@Test
 	void testDeleteFundraiser() {
 
-		assertDoesNotThrow(() -> user.deleteCertificates(5));
+		assertDoesNotThrow(() -> user.deleteCertificates(11));
 
-		assertDoesNotThrow(() -> user.deleteFundRaiser(5));
+		assertDoesNotThrow(() -> user.deleteFundRaiser(11));
 
 	}
 

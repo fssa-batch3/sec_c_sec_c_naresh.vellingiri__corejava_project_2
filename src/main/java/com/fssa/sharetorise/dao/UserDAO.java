@@ -87,7 +87,6 @@ public class UserDAO {
 						user.setEmail(rs.getString("email"));
 						user.setPassword(rs.getString("password"));
 						user.setActive(rs.getBoolean("is_active"));
-						user.setCustomerId(rs.getInt("customer_id"));
 						
 							return user;
 					}
