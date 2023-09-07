@@ -31,7 +31,7 @@ import com.fssa.sharetorise.model.FundRaiser;
 
 	@Test
 
-	void testCreateFundraiser() {
+	void testCreateFundraiser()  {
 
 		FundRaiser fund = new FundRaiser();
 
