@@ -25,6 +25,18 @@ public class FundRaiser {
 
 	private List<Certificate> certificate;// create set 1-img1;2-img2
 
+	private List<Video> video;
+	
+	public List<Video> getVideo() {
+		return video;
+	}
+
+
+	public void setVideo(List<Video> video) {
+		this.video = video;
+	}
+
+
 	public FundRaiser() {
 
 		//Private constructor
@@ -91,7 +103,7 @@ public class FundRaiser {
 	public String toString() {
 		return "FundRaiser [fundraiserId=" + fundraiserId + ", title=" + title + ", description=" + description
 				+ ", fundingGoal=" + fundingGoal + ", fundEndingDate=" + fundEndingDate + ", imageUrl=" + imageUrl
-				+ ", certificate=" + certificate + "]";
+				+ ", certificate=" + certificate + ", video=" + video + "]";
 	}
 	
 

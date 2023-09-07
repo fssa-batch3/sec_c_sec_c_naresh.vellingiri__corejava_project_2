@@ -11,7 +11,7 @@ import com.fssa.sharetorise.exceptions.InvalidInputException;
 import com.fssa.sharetorise.exceptions.ServiceException;
 import com.fssa.sharetorise.model.User;
 
-public class TestUserService {
+ class TestUserService {
 
 	UserService userService = new UserService();
 
@@ -29,7 +29,7 @@ public class TestUserService {
 	@Order(1)
 	 void testValidAddUser() {
 
-		User user = new User("Steffy", "v", 9478253123l, "dharun@gmail.com", "1234567890Dh@",
+		User user = new User("Balaji", "v", 9999953123l, "dharun@gmail.com", "1234567890Dh@",
 				"1234567890Dh@");
 
 		try {

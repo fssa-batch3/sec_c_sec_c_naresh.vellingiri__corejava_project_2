@@ -1,14 +1,10 @@
 package com.fssa.sharetorise.service;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,6 +14,7 @@ import com.fssa.sharetorise.exceptions.DAOException;
 import com.fssa.sharetorise.logger.Logger;
 import com.fssa.sharetorise.model.Certificate;
 import com.fssa.sharetorise.model.FundRaiser;
+import com.fssa.sharetorise.model.Video;
 
  class TestFundraiserService {
 
@@ -48,8 +45,16 @@ import com.fssa.sharetorise.model.FundRaiser;
 				new Certificate("h369sjfn", "https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
 		certificates
 				.add(new Certificate("h647jfn", "https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
-
+		certificates
+		.add(new Certificate("h647jfn", "https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
 		fund.setCertificate(certificates);
+
+		
+		List<Video> video = new ArrayList<>();
+		video.add(new Video("https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
+		video.add(new Video("https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
+
+		fund.setVideo(video);
 
 		assertDoesNotThrow(() -> user.createFundraiser(fund));
 
@@ -75,12 +80,16 @@ import com.fssa.sharetorise.model.FundRaiser;
 				.add(new Certificate("h647jfn", "https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
 
 		fund.setCertificate(certificates);
-		assertDoesNotThrow(() -> user.updateFundraiser(fund, 1));
+		
+		List<Video> video = new ArrayList<>();
+		video.add(new Video("https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
+		fund.setVideo(video);
+		
+		assertDoesNotThrow(() -> user.updateFundraiser(fund, 2));
 
 	}
 
 	@Test
-
 	void testReadAllFundraiser() {
 
 		try {
@@ -103,12 +112,17 @@ import com.fssa.sharetorise.model.FundRaiser;
 
 	
 
+	
 	@Test
 	void testDeleteFundraiser() {
+		
+         int id=16;
+         
+		assertDoesNotThrow(() -> user.deleteVideoLinks(id));
 
-		assertDoesNotThrow(() -> user.deleteCertificates(16));
+		assertDoesNotThrow(() -> user.deleteCertificates(id));
 
-		assertDoesNotThrow(() -> user.deleteFundRaiser(16));
+		assertDoesNotThrow(() -> user.deleteFundRaiser(id));
 
 	}
 

@@ -1,5 +1,6 @@
 package com.fssa.sharetorise.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.fssa.sharetorise.dao.ShareToRiseDAO;
@@ -44,6 +45,23 @@ public class FundraiserService {
 
 		return dao.deleteCertificates(id);
 	}
+	
+	public boolean deleteVideoLinks(int id) throws DAOException {
+
+		return dao.deleteVideoLinks(id);
+	}
+	
+    public FundRaiser getFundraiserById(int id) throws DAOException {
+        try {
+        	
+            return dao.getFundRaiserById(id);
+            
+        } catch (SQLException e) {
+        	
+            throw new DAOException(e.getMessage());
+           
+        }
+    }
 	
 
 }
