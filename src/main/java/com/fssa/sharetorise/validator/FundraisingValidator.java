@@ -32,6 +32,7 @@ public class FundraisingValidator {
 		validateImageURL(fund.getImageUrl());
 		return true;
 	}
+	
 
 	/**
 	 * Validates the title of a fundraiser.
@@ -44,7 +45,7 @@ public class FundraisingValidator {
 	 */
 	public boolean validateTitle(String title) throws InvalidInputException {
 		// Check if the title is not null, not empty, and at least 30 characters long
-		if (title == null || title.equals("") || title.length() < 10 || title.length() > 20) {
+		if (title == null || title.equals("") || title.length() < 10 || title.length() > 30) {
 			throw new InvalidInputException(FundraiserErrors.INVALID_TITLE_NAME);
 		}
 
@@ -194,16 +195,16 @@ public class FundraisingValidator {
 
 		// Use a regular expression to check if the title contains only letters (no
 		// numbers or special characters)
-		String nameregex = "\\b(?:https?|ftp)://\\S+\\.(?:jpg|jpeg|png|gif|bmp)\\b";
-		Pattern pattern = Pattern.compile(nameregex);
-		Matcher matcher = pattern.matcher(certificateUrl);
-		Boolean isMatch = matcher.matches();
-
-		// If the title does not match the regular expression, it is considered invalid
-		if (!isMatch) {
-			throw new InvalidInputException(FundraiserErrors.INVALID_CERTIFICATE_URL);
-		}
-
+//		String nameregex = "\\b(?:https?|ftp)://\\S+\\.(?:jpg|jpeg|png|gif|bmp)\\b";
+//		Pattern pattern = Pattern.compile(nameregex);
+//		Matcher matcher = pattern.matcher(certificateUrl);
+//		Boolean isMatch = matcher.matches();
+//
+//		// If the title does not match the regular expression, it is considered invalid
+//		if (!isMatch) {
+//			throw new InvalidInputException(FundraiserErrors.INVALID_CERTIFICATE_URL);
+//		}
+//
 		return true;
 	}
 	

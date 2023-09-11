@@ -11,6 +11,10 @@ public class Video {
 		this.videoUrl = videoUrl;
 	}
 
+	public Video() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getVideoUrl() {
 		return videoUrl;
 	}

@@ -21,6 +21,7 @@ public class ShareToRiseDAO {
 		int genenratedFundraiserId = -1;
 
 		try (Connection con = ConnectionUtil.getConnection()) {
+			
 			String sql = "INSERT INTO fundraiser ( title, description, funding_goal,fund_ending_date,image_url) VALUES (?, ?, ?, ?,?)";
 
 			try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -216,6 +217,36 @@ public class ShareToRiseDAO {
 
 		return allCert;
 	}
+	public List<Video> getAllVideos(int id) throws DAOException {
+
+		List<Video> allVideos = new ArrayList<>();
+
+		try (Connection con = ConnectionUtil.getConnection()) {
+
+			String sql = "SELECT links FROM videolinks WHERE fundraiser_id = ?";
+
+			try (PreparedStatement pst = con.prepareStatement(sql)) {
+
+				pst.setInt(1, id);
+
+				try (ResultSet rs = pst.executeQuery()) {
+
+					while (rs.next()) {
+
+						Video video = new Video();
+						video.setVideoUrl(rs.getString("links"));
+						allVideos.add(video);
+
+					}
+
+				}
+			}
+		} catch (SQLException e) {
+			throw new DAOException("Failled to read all certificates." + e.getMessage());
+		}
+
+		return allVideos;
+	}
 
 	public List<FundRaiser> getAllFundraiser() throws DAOException {
 
@@ -319,6 +350,7 @@ public class ShareToRiseDAO {
 		return true;
 	}
 
+	
 	public FundRaiser getFundRaiserById(int id) throws SQLException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
@@ -334,6 +366,8 @@ public class ShareToRiseDAO {
 					fundraiser.setDescription(resultSet.getString("description"));
 					fundraiser.setFundingGoal(resultSet.getDouble("funding_goal"));
 					fundraiser.setImageUrl(resultSet.getString("image_url"));
+					fundraiser.setCertificate(getAllCertificates(id));
+					fundraiser.setVideo(getAllVideos(id));
 					fundraiser.setFundEndingDate(resultSet.getDate("fund_ending_date").toLocalDate());
 					return fundraiser;
 

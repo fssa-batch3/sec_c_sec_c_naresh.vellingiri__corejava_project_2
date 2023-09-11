@@ -41,18 +41,20 @@ import com.fssa.sharetorise.model.Video;
 		fund.setFundingGoal(10000);
 
 		List<Certificate> certificates = new ArrayList<>();
+		
 		certificates.add(
-				new Certificate("h369sjfn", "https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
+				new Certificate("h369sjfn", "https://freeimghost.net/images/2023/05/21/certificate_1.jpeg"));
 		certificates
-				.add(new Certificate("h647jfn", "https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
-		certificates
-		.add(new Certificate("h647jfn", "https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
+				.add(new Certificate("h647jfn", "https://freeimghost.net/images/2023/05/21/certificate_3.jpeg"));
+		
+		
+		
 		fund.setCertificate(certificates);
 
 		
 		List<Video> video = new ArrayList<>();
-		video.add(new Video("https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
-		video.add(new Video("https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
+		video.add(new Video("https://youtu.be/ED7Z6J2Y5T4?feature=shared"));
+		video.add(new Video("https://youtu.be/hvSDbX790rI?feature=shared"));
 
 		fund.setVideo(video);
 
@@ -67,11 +69,11 @@ import com.fssa.sharetorise.model.Video;
 //    	FundraisingValidator
 		FundRaiser fund = new FundRaiser();
 
-		fund.setTitle("Youth Cricket Match");
+		fund.setTitle("Football Clubs");
 		fund.setDescription("This fund is need for future football player who needs fund for his financial ");
 		fund.setFundEndingDate(LocalDate.of(2023, 9, 26));
 		fund.setFundingGoal(20000);
-		fund.setImageUrl("https://freeimghost.net/images/2023/05/22/kohli_img.jpeg");
+		fund.setImageUrl("https://media.istockphoto.com/id/623472590/photo/portrait-of-young-man-gymnasts.jpg?");
 
 		List<Certificate> certificates = new ArrayList<>();
 		certificates.add(
@@ -82,10 +84,10 @@ import com.fssa.sharetorise.model.Video;
 		fund.setCertificate(certificates);
 		
 		List<Video> video = new ArrayList<>();
-		video.add(new Video("https://www.kasandbox.org/programming-images/avatars/spunky-sam.png"));
+		video.add(new Video("h"));
 		fund.setVideo(video);
 		
-		assertDoesNotThrow(() -> user.updateFundraiser(fund, 2));
+		assertDoesNotThrow(() -> user.updateFundraiser(fund, 47));
 
 	}
 
@@ -116,7 +118,8 @@ import com.fssa.sharetorise.model.Video;
 	@Test
 	void testDeleteFundraiser() {
 		
-         int id=16;
+		//34
+         int id=44;
          
 		assertDoesNotThrow(() -> user.deleteVideoLinks(id));
 
