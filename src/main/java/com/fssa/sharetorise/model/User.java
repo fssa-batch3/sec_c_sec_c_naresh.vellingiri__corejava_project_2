@@ -17,6 +17,7 @@ public class User {
 		// Empty constructor used for creating an instance without setting attributes
 	}
 
+	
 	public User(String firstName, String lastName, long phoneNumber, String email, String password,
 			String confirmPassword) {
 		this.firstName = firstName;
