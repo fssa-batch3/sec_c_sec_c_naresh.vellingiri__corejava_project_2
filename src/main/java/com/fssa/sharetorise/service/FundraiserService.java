@@ -3,6 +3,7 @@ package com.fssa.sharetorise.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.fssa.sharetorise.dao.DonateFundDao;
 import com.fssa.sharetorise.dao.ShareToRiseDAO;
 import com.fssa.sharetorise.exceptions.*;
 import com.fssa.sharetorise.model.FundRaiser;
@@ -12,6 +13,7 @@ public class FundraiserService {
 
 	FundraisingValidator validator = new FundraisingValidator();
 	ShareToRiseDAO dao = new ShareToRiseDAO();
+	DonateFundDao donateFundDao = new DonateFundDao();
 
 	public boolean createFundraiser(FundRaiser fundraiser) throws DAOException {
 
@@ -61,6 +63,15 @@ public class FundraiserService {
             throw new DAOException(e.getMessage());
            
         }
+    }
+    
+    public boolean donateFundint(double amount, int userId, int fundRaiserId) throws DAOException {
+        
+    	if(true) {
+    		return donateFundDao.donateFund(amount, userId, fundRaiserId);
+    	}
+		return false;
+    
     }
 	
 

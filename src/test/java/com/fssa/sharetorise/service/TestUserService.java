@@ -1,6 +1,13 @@
 package com.fssa.sharetorise.service;
 
-	/**
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import com.fssa.sharetorise.exceptions.DAOException;
+import com.fssa.sharetorise.exceptions.ServiceException;
+import com.fssa.sharetorise.model.User;
+
+/**
 	 * Test case for validating the addition of a valid customer using the
 	 * CustomerService's `addCustomer` method. It verifies whether a valid customer
 	 * can be added successfully to the system.
@@ -10,18 +17,23 @@ package com.fssa.sharetorise.service;
 	 * @throws ValidatorException If there is an issue with validating the customer
 	 *                            data during the test.
 	 */
-//	 void testValidAddUser() {
-//
-//		User user = new User("Naresh", "v", 6383434544l, "naresh.com", "1234567890Dh@",
-//				"1234567890Dh@");
-//
-//		try {
-//			Assertions.assertTrue(userService.addUser(user));
-//		} catch (ServiceException e) {
-//			Assertions.fail(e);
-//		}
-
+class TestUserService{
 	
+	@Test
+	 void testValidAddUser() {
+
+		 UserService  userService = new UserService();
+		User user = new User();
+		
+
+		try {
+			Assertions.assertTrue(userService.addUser(user));
+		} catch (ServiceException e) {
+			Assertions.fail(e);
+		}
+	 }
+	 
+}
 
 //	@Test
 //	@Order(2)
@@ -38,5 +50,3 @@ package com.fssa.sharetorise.service;
 //		}
 //
 //	}
-
- 

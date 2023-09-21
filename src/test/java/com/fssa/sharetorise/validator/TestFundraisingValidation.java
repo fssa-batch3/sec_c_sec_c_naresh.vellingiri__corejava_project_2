@@ -85,6 +85,7 @@ public class TestFundraisingValidation {
 
 	
 	
+	
 	@Test
 	void testValidateTitleInvalidEmpty() {
 		// Arrange

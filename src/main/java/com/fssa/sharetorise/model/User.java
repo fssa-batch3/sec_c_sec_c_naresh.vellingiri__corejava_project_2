@@ -1,6 +1,5 @@
 package com.fssa.sharetorise.model;
 
-
 public class User {
 
 	private int userId;
@@ -12,22 +11,13 @@ public class User {
 	private String confirmPassword;
 	private boolean isActive;
 
-	// No argument constructor
-	public User() {
-		// Empty constructor used for creating an instance without setting attributes
+	public int getUserId() {
+		return userId;
 	}
 
-	
-	public User(String firstName, String lastName, long phoneNumber, String email, String password,
-			String confirmPassword) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.password = password;
-		this.confirmPassword = confirmPassword;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-
 
 	public String getFirstName() {
 		return firstName;
@@ -77,14 +67,6 @@ public class User {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public int getCustomerId() {
-		return userId;
-	}
-
-	public void setCustomerId(int customerId) {
-		this.userId = customerId;
-	}
-
 	public boolean isActive() {
 		return isActive;
 	}
@@ -95,9 +77,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", phoneNumber=" + phoneNumber + ", email=" + email + ", password=" + password + ", confirmPassword="
-				+ confirmPassword + ", isActive=" + isActive + "]";
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
+				+ phoneNumber + ", email=" + email + ", password=" + password + ", confirmPassword=" + confirmPassword
+				+ ", isActive=" + isActive + "]";
 	}
 
 }

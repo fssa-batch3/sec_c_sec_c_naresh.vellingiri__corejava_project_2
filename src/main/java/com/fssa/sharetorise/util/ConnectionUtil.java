@@ -33,7 +33,7 @@ public class ConnectionUtil {
 
 
 		} catch (Exception e) {
-			throw new DAOException("Unable to connect to the database");
+			throw new DAOException("Unable to connect to the database(connection util)");
 		} 
 
 		return con;

@@ -27,7 +27,7 @@ public class TestUserValidation {
 		try {
 
 			UserValidator.validate(null);
-		} catch (Exception e) {
+		} catch (Exception e) { 
 
 			Assertions.assertEquals(UserValidationErrors.NULL_OBJECT, e.getMessage());
 		}

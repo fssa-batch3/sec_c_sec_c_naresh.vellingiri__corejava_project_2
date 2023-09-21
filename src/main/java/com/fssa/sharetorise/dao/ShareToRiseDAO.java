@@ -1,6 +1,7 @@
 package com.fssa.sharetorise.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -362,6 +363,7 @@ public class ShareToRiseDAO {
 
 				if (resultSet.next()) {
 					FundRaiser fundraiser = new FundRaiser();
+				
 					fundraiser.setTitle(resultSet.getString("title"));
 					fundraiser.setDescription(resultSet.getString("description"));
 					fundraiser.setFundingGoal(resultSet.getDouble("funding_goal"));

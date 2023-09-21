@@ -14,13 +14,10 @@ import com.fssa.sharetorise.model.User;
 import com.fssa.sharetorise.util.ConnectionUtil;
 
 public class UserDAO {
-	
-	
+
 	public UserDAO() {
 //		private constructor 
 	}
-
-	
 
 	public static boolean addUser(User user) throws DAOException {
 
@@ -35,10 +32,9 @@ public class UserDAO {
 				pst.setString(3, user.getEmail());
 				pst.setLong(4, user.getPhoneNumber());
 				pst.setString(5, user.getPassword());
-				
+
 				pst.executeUpdate();
 			}
-			
 
 		}
 
@@ -66,7 +62,7 @@ public class UserDAO {
 
 	public static User logInUser(String email, String password) throws DAOException, SQLException {
 
-		final String query = "SELECT * FROM users WHERE email = ? AND password=? ";
+		final String query = "SELECT user_id, first_name, last_name, email, phone, password, is_active FROM users WHERE email = ? AND password=? ";
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
@@ -75,20 +71,20 @@ public class UserDAO {
 				pst.setString(1, email);
 				pst.setString(2, password);
 
-				
 				try (ResultSet rs = pst.executeQuery()) {
 
 					if (rs.next()) {
 
-						User user= new User();
+						User user = new User();
+						user.setUserId(rs.getInt("user_id"));
 						user.setFirstName(rs.getString("first_name"));
 						user.setLastName(rs.getString("last_name"));
 						user.setPhoneNumber(rs.getLong("phone"));
 						user.setEmail(rs.getString("email"));
 						user.setPassword(rs.getString("password"));
 						user.setActive(rs.getBoolean("is_active"));
-						
-							return user;
+
+						return user;
 					}
 				}
 			}
@@ -99,21 +95,18 @@ public class UserDAO {
 			throw new DAOException(UserDAOError.INVALID_DATA);
 		}
 		return null;
-		
-		
+
 	}
-	
-	
 
-	public static boolean isAvailableUser(long phone) throws DAOException {
+	public static boolean isAvailableUser(String email) throws DAOException {
 
-		final String query = "SELECT phone FROM users WHERE phone = ?";
+		final String query = "SELECT phone FROM users WHERE email = ?";
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 
-				pst.setLong(1, phone);
+				pst.setString(1, email);
 
 				try (ResultSet rs = pst.executeQuery()) {
 
@@ -125,18 +118,18 @@ public class UserDAO {
 			}
 		} catch (SQLException e) {
 
-			throw new DAOException(UserDAOError.UNAVAILABLE_ACCOUNT);
+			throw new DAOException(UserDAOError.ALREADY_AVAILABLE_ACCOUNT);
 		}
 
 		return false;
 	}
 
-	public static boolean isActive(long phone) throws DAOException {
-		final String query = "SELECT COUNT(*) FROM users WHERE phone = ? AND is_active = ?";
+	public static boolean isActive(String email) throws DAOException {
+		final String query = "SELECT COUNT(*) FROM users WHERE email = ? AND is_active = ?";
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 			try (PreparedStatement pst = con.prepareStatement(query)) {
-				pst.setLong(1, phone);
+				pst.setString(1, email);
 				pst.setBoolean(2, ShareToRiseConstants.STATIC_IS_ACTIVE_TRUE);
 				try (ResultSet rs = pst.executeQuery()) {
 					if (rs.next()) {
@@ -151,18 +144,15 @@ public class UserDAO {
 		return false;
 	}
 
-	
-	public static List<User> getUserDetailsByPhoneNumber(long phone) throws DAOException {
+	public static User getUserDetailsEmailId(String email) throws DAOException {
 
-		List<User> userList = new ArrayList<>();
-
-		final String query = "SELECT customer_id,first_name,last_name,phone,email,password,is_active FROM users WHERE phone = ?";
+		final String query = "SELECT first_name,last_name,phone,email,password,is_active,user_id FROM users WHERE email = ?";
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 
-				pst.setLong(1, phone);
+				pst.setString(1, email);
 				try (ResultSet rs = pst.executeQuery()) {
 
 					if (rs.next()) {
@@ -174,19 +164,18 @@ public class UserDAO {
 						user.setEmail(rs.getString("email"));
 						user.setPassword(rs.getString("password"));
 						user.setActive(rs.getBoolean("is_active"));
-						user.setCustomerId(rs.getInt("customer_id"));
-						userList.add(user);
+						user.setUserId(rs.getInt("user_id"));
+						return user;
 					}
 				}
 			}
 		}
 
 		catch (SQLException e) {
-
-			throw new DAOException(UserDAOError.INVALID_DATA);
+			e.printStackTrace();
+			throw new DAOException(e.getMessage());
 		}
-
-		return userList;
+		return null;
 
 	}
 }
