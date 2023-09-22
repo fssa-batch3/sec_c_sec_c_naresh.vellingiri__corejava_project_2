@@ -31,18 +31,13 @@ public class UserService {
 			throw new ServiceException(e.getMessage());
 
 		}
- 
+
 		return false;
 	}
 
-	
 	public static void main(String[] args) throws InvalidInputException, DAOException, SQLException {
-		User user = login("naresh@gmail.com", "1234567890Dh@");
-		System.out.println(user.getFirstName());
-		System.out.println(user.getLastName());
-		System.out.println(user.getEmail());
-		System.out.println(user.getPhoneNumber());
-
+		User user = login("naresh@gmail.com", "Naresh@2000");
+		System.out.println(user);
 
 	}
 

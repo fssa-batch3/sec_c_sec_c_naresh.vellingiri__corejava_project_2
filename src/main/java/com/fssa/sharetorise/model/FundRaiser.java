@@ -2,11 +2,7 @@ package com.fssa.sharetorise.model;
 
 import java.time.LocalDate;
 
-
-
 import java.util.List;
-
-
 
 /*
  * 
@@ -14,6 +10,8 @@ import java.util.List;
  * 
  * */
 public class FundRaiser {
+
+	private int userId;
 
 	private int fundraiserId;// ===============
 
@@ -30,22 +28,29 @@ public class FundRaiser {
 	private List<Certificate> certificate;// create set 1-img1;2-img2
 
 	private List<Video> video;
-	
+
 	public List<Video> getVideo() {
 		return video;
 	}
 
+	public double raised_amount;
+
+	public double getRaised_amount() {
+		return raised_amount;
+	}
+
+	public void setRaised_amount(double raised_amount) {
+		this.raised_amount = raised_amount;
+	}
 
 	public void setVideo(List<Video> video) {
 		this.video = video;
 	}
 
-
 	public FundRaiser() {
 
-		//Private constructor
+		// Private constructor
 	}
-
 
 	public int getFundraiserId() {
 		return fundraiserId;
@@ -103,12 +108,20 @@ public class FundRaiser {
 		this.certificate = certificate;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public String toString() {
-		return "FundRaiser [fundraiserId=" + fundraiserId + ", title=" + title + ", description=" + description
-				+ ", fundingGoal=" + fundingGoal + ", fundEndingDate=" + fundEndingDate + ", imageUrl=" + imageUrl
-				+ ", certificate=" + certificate + ", video=" + video + "]";
+		return "FundRaiser [userId=" + userId + ", fundraiserId=" + fundraiserId + ", title=" + title + ", description="
+				+ description + ", fundingGoal=" + fundingGoal + ", fundEndingDate=" + fundEndingDate + ", imageUrl="
+				+ imageUrl + ", certificate=" + certificate + ", video=" + video + ", raised_amount=" + raised_amount
+				+ "]";
 	}
-	
 
 }

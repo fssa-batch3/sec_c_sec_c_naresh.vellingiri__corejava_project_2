@@ -17,10 +17,33 @@ public class FundraiserService {
 
 	public boolean createFundraiser(FundRaiser fundraiser) throws DAOException {
 
-		if (validator.validateFundingRaiser(fundraiser))
-			return dao.createFundraiser(fundraiser);
+		if (validator.validateFundingRaiser(fundraiser)) {
+
+			if (fundraiser.getCertificate().isEmpty() && fundraiser.getVideo().isEmpty()) {
+
+				// call basic DAO Method
+				return dao.createFundraiserWithVideosOnly(fundraiser);
+
+			}
+
+			else if (fundraiser.getVideo().isEmpty()) {
+
+				// call the basic and cert method
+				return dao.createFundraiserWithCertificates(fundraiser);
+			}
+
+			else if (fundraiser.getCertificate().isEmpty()) {
+				return dao.createFundraiserWithVideosOnly(fundraiser);
+
+			} else {
+
+				// call the all the method to add all the details
+				return dao.createFundraiser(fundraiser);
+			}
+
+		}
 		return false;
- 
+
 	}
 
 	public boolean updateFundraiser(FundRaiser fundraiser, int id) throws DAOException {
@@ -30,8 +53,6 @@ public class FundraiserService {
 
 		return false;
 	}
-	
-	
 
 	public List<FundRaiser> readAllFundraiser() throws DAOException {
 
@@ -42,37 +63,36 @@ public class FundraiserService {
 
 		return dao.deleteFundraiser(id);
 	}
-	
+
 	public boolean deleteCertificates(int id) throws DAOException {
 
 		return dao.deleteCertificates(id);
 	}
-	
+
 	public boolean deleteVideoLinks(int id) throws DAOException {
 
 		return dao.deleteVideoLinks(id);
 	}
-	
-    public FundRaiser getFundraiserById(int id) throws DAOException {
-        try {
-        	
-            return dao.getFundRaiserById(id);
-            
-        } catch (SQLException e) {
-        	
-            throw new DAOException(e.getMessage());
-           
-        }
-    }
-    
-    public boolean donateFundint(double amount, int userId, int fundRaiserId) throws DAOException {
-        
-    	if(true) {
-    		return donateFundDao.donateFund(amount, userId, fundRaiserId);
-    	}
+
+	public FundRaiser getFundraiserById(int id) throws DAOException {
+		try {
+
+			return dao.getFundRaiserById(id);
+
+		} catch (SQLException e) {
+
+			throw new DAOException(e.getMessage());
+
+		}
+	}
+
+	public boolean donateFundint(double amount, int userId, int fundRaiserId) throws DAOException {
+
+		if (true) {
+			return donateFundDao.donateFund(amount, userId, fundRaiserId);
+		}
 		return false;
-    
-    }
-	
+
+	}
 
 }

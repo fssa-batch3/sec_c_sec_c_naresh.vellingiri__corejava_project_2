@@ -15,7 +15,7 @@ public class DonateFundDao {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
-			String sql = "INSERT INTO donation ( donation_amount, donated_user_id, fundraiser_id) VALUES (?, ?, ?)";
+			String sql = "INSERT INTO donation (donation_amount, donated_user_id, fundraiser_id) VALUES (?, ?, ?)";
 
 			try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
 
@@ -24,13 +24,14 @@ public class DonateFundDao {
 				preparedStatement.setInt(3, fundRaiserId);
 
 				int affectedRows = preparedStatement.executeUpdate();
+
 				updateDonateFund(amount, fundRaiserId);
 			}
 
 			return true;
 
 		} catch (SQLException ex) {
-			throw new DAOException("Failed to insert the fundraiser into the database. " + ex.getMessage());
+			throw new DAOException("Failed to insert the fundraiser into the donated  database. " + ex.getMessage());
 		}
 
 	}
@@ -83,7 +84,7 @@ public class DonateFundDao {
 		return -1;
 
 	}
-	
+
 	public double getFundGoalAmountById(int fundRaiserId) throws DAOException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
