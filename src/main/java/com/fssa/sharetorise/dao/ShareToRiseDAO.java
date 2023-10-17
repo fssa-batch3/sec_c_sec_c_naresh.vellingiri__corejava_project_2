@@ -12,6 +12,7 @@ import java.util.List;
 import com.fssa.sharetorise.exceptions.DAOException;
 import com.fssa.sharetorise.model.Certificate;
 import com.fssa.sharetorise.model.FundRaiser;
+import com.fssa.sharetorise.model.SportsCategories;
 import com.fssa.sharetorise.model.Video;
 import com.fssa.sharetorise.util.ConnectionUtil;
 
@@ -23,7 +24,7 @@ public class ShareToRiseDAO {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
-			String sql = "INSERT INTO fundraiser ( title, description, funding_goal,fund_ending_date,image_url,raised_amount,user_id ) VALUES (?, ?, ?, ?,?,?,?)";
+			String sql = "INSERT INTO fundraiser ( title, description, funding_goal,fund_ending_date,image_url,raised_amount,user_id,sports_type ) VALUES (?, ?, ?, ?,?,?,?,?)";
 
 			try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -34,6 +35,7 @@ public class ShareToRiseDAO {
 				preparedStatement.setString(5, fundingRaiser.getImageUrl());
 				preparedStatement.setDouble(6, 0);
 				preparedStatement.setInt(7, fundingRaiser.getUserId());
+				preparedStatement.setString(8, fundingRaiser.getCategory().toString());
 
 				int affectedRows = preparedStatement.executeUpdate();
 
@@ -67,7 +69,7 @@ public class ShareToRiseDAO {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
-			String sql = "INSERT INTO fundraiser ( title, description, funding_goal,fund_ending_date,image_url,raised_amount,user_id ) VALUES (?, ?, ?, ?,?,?,?)";
+			String sql = "INSERT INTO fundraiser ( title, description, funding_goal,fund_ending_date,image_url,raised_amount,user_id,sports_type ) VALUES (?, ?, ?, ?,?,?,?,?)";
 
 			try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -78,7 +80,7 @@ public class ShareToRiseDAO {
 				preparedStatement.setString(5, fundingRaiser.getImageUrl());
 				preparedStatement.setDouble(6, 0);
 				preparedStatement.setInt(7, fundingRaiser.getUserId());
-
+				preparedStatement.setString(8, fundingRaiser.getCategory().toString());
 				int affectedRows = preparedStatement.executeUpdate();
 
 				if (affectedRows > 0) {
@@ -110,7 +112,7 @@ public class ShareToRiseDAO {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
-			String sql = "INSERT INTO fundraiser ( title, description, funding_goal,fund_ending_date,image_url,raised_amount,user_id ) VALUES (?, ?, ?, ?,?,?,?)";
+			String sql = "INSERT INTO fundraiser ( title, description, funding_goal,fund_ending_date,image_url,raised_amount,user_id,sports_type ) VALUES (?, ?, ?, ?,?,?,?,?)";
 
 			try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -121,6 +123,7 @@ public class ShareToRiseDAO {
 				preparedStatement.setString(5, fundingRaiser.getImageUrl());
 				preparedStatement.setDouble(6, 0);
 				preparedStatement.setInt(7, fundingRaiser.getUserId());
+				preparedStatement.setString(8, fundingRaiser.getCategory().toString());
 
 				int affectedRows = preparedStatement.executeUpdate();
 
@@ -151,7 +154,8 @@ public class ShareToRiseDAO {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
-			String sql = "INSERT INTO fundraiser ( title, description, funding_goal,fund_ending_date,image_url,raised_amount,user_id ) VALUES (?, ?, ?, ?,?,?,?)";
+			String sql = "INSERT INTO fundraiser ( title, description, funding_goal,fund_ending_date,image_url,raised_amount,user_id,sports_type ) VALUES (?, ?, ?, ?,?,?,?,?)";
+			;
 
 			try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
 
@@ -162,6 +166,7 @@ public class ShareToRiseDAO {
 				preparedStatement.setString(5, fundingRaiser.getImageUrl());
 				preparedStatement.setDouble(6, 0);
 				preparedStatement.setInt(7, fundingRaiser.getUserId());
+				preparedStatement.setString(8, fundingRaiser.getCategory().toString());
 
 				int affectedRows = preparedStatement.executeUpdate();
 
@@ -187,14 +192,13 @@ public class ShareToRiseDAO {
 				preparedStatement.setDate(4, java.sql.Date.valueOf(fundingRaiser.getFundEndingDate()));
 				preparedStatement.setString(5, fundingRaiser.getImageUrl());
 				preparedStatement.setInt(6, id);
+				
 
 				// Assuming you have a method to get the
 				// fundraising_id
 				preparedStatement.executeUpdate();
 
 			}
-
-			updateCertificates(fundingRaiser.getCertificate(), id);
 
 			return true;
 		} catch (SQLException ex) {
@@ -371,7 +375,7 @@ public class ShareToRiseDAO {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
-			String sql = "SELECT id,title,description,funding_goal,image_url,fund_ending_date FROM fundraiser";
+			String sql = "SELECT id,title,description,funding_goal,image_url,fund_ending_date,raised_amount FROM fundraiser";
 
 			try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
@@ -387,6 +391,7 @@ public class ShareToRiseDAO {
 						raiser.setFundEndingDate(rs.getDate("fund_ending_date").toLocalDate());
 						raiser.setFundingGoal(rs.getDouble("funding_goal"));
 						raiser.setImageUrl(rs.getString("image_url"));
+						raiser.setRaised_amount(rs.getDouble("raised_amount"));
 
 						raiser.setCertificate(getAllCertificates(rs.getInt("id")));
 
@@ -413,6 +418,9 @@ public class ShareToRiseDAO {
 
 				pst.setInt(1, id);
 
+				deleteCertificates(id);
+				deleteVideoLinks(id);
+
 				int rows = pst.executeUpdate();
 
 				if (rows == 0) {
@@ -421,8 +429,6 @@ public class ShareToRiseDAO {
 				}
 			}
 
-			deleteCertificates(id);
-			deleteVideoLinks(id);
 		} catch (SQLException e) {
 
 			throw new DAOException("Failed to delete the fundraiser." + e.getMessage());
@@ -449,9 +455,9 @@ public class ShareToRiseDAO {
 		try (Connection con = ConnectionUtil.getConnection()) {
 			String sql = "DELETE FROM videolinks WHERE fundraiser_id = ?";
 			try (PreparedStatement pst = con.prepareStatement(sql)) {
-	
+
 				pst.setInt(1, id);
-				
+
 				pst.executeUpdate();
 
 			}
@@ -465,7 +471,7 @@ public class ShareToRiseDAO {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
-			String query = "SELECT title, description, funding_goal, image_url, fund_ending_date FROM fundraiser WHERE id = ?";
+			String query = "SELECT id,title,description,funding_goal,image_url,fund_ending_date,raised_amount,sports_type FROM fundraiser WHERE id = ?";
 			try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 				preparedStatement.setInt(1, id);
 				ResultSet resultSet = preparedStatement.executeQuery();
@@ -473,6 +479,7 @@ public class ShareToRiseDAO {
 				if (resultSet.next()) {
 					FundRaiser fundraiser = new FundRaiser();
 
+					fundraiser.setFundraiserId(id);
 					fundraiser.setTitle(resultSet.getString("title"));
 					fundraiser.setDescription(resultSet.getString("description"));
 					fundraiser.setFundingGoal(resultSet.getDouble("funding_goal"));
@@ -480,6 +487,7 @@ public class ShareToRiseDAO {
 					fundraiser.setCertificate(getAllCertificates(id));
 					fundraiser.setVideo(getAllVideos(id));
 					fundraiser.setFundEndingDate(resultSet.getDate("fund_ending_date").toLocalDate());
+					fundraiser.setCategory(SportsCategories.valueOf(resultSet.getString("sports_type")));
 					return fundraiser;
 
 				}
@@ -487,6 +495,53 @@ public class ShareToRiseDAO {
 
 		}
 		return null;
+
+	}
+
+	public List<FundRaiser> getAllFundraiserByUserId(int id) throws DAOException {
+
+		List<FundRaiser> allFundraiserByUserId = new ArrayList<>();
+
+		try (Connection con = ConnectionUtil.getConnection()) {
+
+			String sql = "SELECT id,title,description,funding_goal,image_url,fund_ending_date,raised_amount FROM fundraiser where user_id=?";
+
+			try (PreparedStatement stmt = con.prepareStatement(sql)) {
+
+				stmt.setInt(1, id);
+				try (ResultSet rs = stmt.executeQuery()) {
+
+					while (rs.next()) {
+
+						FundRaiser raiser = new FundRaiser();
+
+						raiser.setFundraiserId(rs.getInt("id"));
+						raiser.setUserId(id);
+						raiser.setTitle(rs.getString("title"));
+						raiser.setDescription(rs.getString("description"));
+						raiser.setFundEndingDate(rs.getDate("fund_ending_date").toLocalDate());
+						raiser.setFundingGoal(rs.getDouble("funding_goal"));
+						raiser.setImageUrl(rs.getString("image_url"));
+						raiser.setRaised_amount(rs.getDouble("raised_amount"));
+
+						raiser.setCertificate(getAllCertificates(rs.getInt("id")));
+
+						allFundraiserByUserId.add(raiser);
+					}
+				}
+
+			}
+		} catch (SQLException e) {
+
+			throw new DAOException("Failed to get all fundraiser." + e.getMessage());
+		}
+
+		return allFundraiserByUserId;
+	}
+
+	public static void main(String[] args) {
+		ShareToRiseDAO d = new ShareToRiseDAO();
+		System.out.println(d.getAllFundraiserByUserId(3));
 
 	}
 

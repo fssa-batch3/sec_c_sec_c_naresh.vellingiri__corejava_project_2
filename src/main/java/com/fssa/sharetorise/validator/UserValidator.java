@@ -30,7 +30,10 @@ public class UserValidator {
 	 *                                    during the process
 	 */
 
+	
 	public static boolean validate(User user) throws InvalidInputException {
+		
+		
 
 		if (user == null) {
 
@@ -47,6 +50,7 @@ public class UserValidator {
 
 	}
 
+	
 	
 	
 	/**
@@ -214,6 +218,7 @@ public class UserValidator {
 	
 	
 	
+	
 
 	public static boolean validatePhoneNumber(long phoneNumber) throws InvalidInputException {
 
@@ -228,6 +233,18 @@ public class UserValidator {
 			Logger.info("Valid mobilenumber");
 			throw new InvalidInputException(UserValidationErrors.INVALID_PHONENUMBER);
 		}
+		return true;
+
+	}
+	
+	
+	public static boolean validateId(int id) throws InvalidInputException {
+
+			if(id<0) {
+				
+				throw new InvalidInputException(UserValidationErrors.INVALID_ID);
+			}	
+	
 		return true;
 
 	}

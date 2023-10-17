@@ -87,6 +87,8 @@ public class DonateFundDao {
 
 	public double getFundGoalAmountById(int fundRaiserId) throws DAOException {
 
+		System.out.println("hi");
+
 		try (Connection con = ConnectionUtil.getConnection()) {
 
 			String sql = "SELECT raised_amount FROM fundraiser  WHERE id=?";
@@ -99,7 +101,9 @@ public class DonateFundDao {
 
 				if (rs.next()) {
 					double raisedAmount = rs.getDouble("raised_amount");
+					System.out.println(raisedAmount);
 					return raisedAmount;
+
 				}
 			}
 
@@ -108,5 +112,23 @@ public class DonateFundDao {
 		}
 		return -1;
 
+	}
+
+	public int countDonationsByFundraiserId(int fundraiserId) throws DAOException {
+
+		try (Connection con = ConnectionUtil.getConnection()) {
+			String sql = "SELECT COUNT(*) FROM donation WHERE fundraiser_id = ?";
+			try (PreparedStatement statement = con.prepareStatement(sql)) {
+				statement.setInt(1, fundraiserId);
+				try (ResultSet resultSet = statement.executeQuery()) {
+					if (resultSet.next()) {
+						return resultSet.getInt(1);
+					}
+				}
+			}
+		} catch (SQLException ex) {
+			throw new DAOException(ex.getMessage());
+		}
+		return fundraiserId = 0;
 	}
 }

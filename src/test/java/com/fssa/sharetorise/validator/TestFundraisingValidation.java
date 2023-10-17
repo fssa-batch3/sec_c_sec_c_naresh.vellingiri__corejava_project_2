@@ -32,7 +32,7 @@ public class TestFundraisingValidation {
 
 		fund.setTitle("Fund for Football");
 		fund.setDescription("This fund is need for future football player who needs fund for his financial ");
-		fund.setFundEndingDate(LocalDate.of(2023, 9, 26));
+		fund.setFundEndingDate(LocalDate.of(2023, 12, 26));
 		fund.setFundingGoal(3000);
 		fund.setImageUrl("https://staticg.sportskeeda.com/Football+wallpapers/CR7/cr7.jpg");
 
@@ -282,16 +282,10 @@ public class TestFundraisingValidation {
 
 		for (String url : validImageUrl) {
 
-			try {
 
 				assertTrue(validator.validateImageURL(url));
-			} catch (InvalidInputException e) {
-
-				assertDoesNotThrow(() -> validator.validateImageURL(url));
-
-
-				fail(e);
-			}
+			 
+			
 
 		}
 

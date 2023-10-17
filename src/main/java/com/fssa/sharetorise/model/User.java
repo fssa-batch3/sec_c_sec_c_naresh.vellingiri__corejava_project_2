@@ -10,6 +10,22 @@ public class User {
 	private String password;
 	private String confirmPassword;
 	private boolean isActive;
+	
+	public User(){
+		// Private contructor
+	}
+	
+	public User(String firstName, String lastName, long phoneNumber, String email, String password,
+			String confirmPassword) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.password = password;
+		this.confirmPassword = confirmPassword;
+	}
+
 
 	public int getUserId() {
 		return userId;

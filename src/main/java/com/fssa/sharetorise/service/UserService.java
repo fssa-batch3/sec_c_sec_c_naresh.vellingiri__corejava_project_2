@@ -19,14 +19,15 @@ public class UserService {
 				if (!UserDAO.isAvailableUser(user.getEmail())) {
 					return UserDAO.addUser(user);
 
-				} else {
-
-					throw new InvalidInputException(UserDAOError.ALREADY_AVAILABLE_ACCOUNT);
+				} 
+				
+				else {
+					throw new ServiceException("Add User is invalid");
 				}
-
+			
 			}
 
-		} catch (InvalidInputException | DAOException e) {
+		} catch (ServiceException e) {
 
 			throw new ServiceException(e.getMessage());
 
@@ -35,21 +36,25 @@ public class UserService {
 		return false;
 	}
 
-	public static void main(String[] args) throws InvalidInputException, DAOException, SQLException {
-		User user = login("naresh@gmail.com", "Naresh@2000");
-		System.out.println(user);
+	
+	
+	
 
-	}
 
-	public static User login(String email, String password) throws InvalidInputException, DAOException, SQLException {
+	public User login(String email, String password) throws ServiceException {
 
 		UserDAO userDAO = new UserDAO();
-
-		if (UserValidator.validateEmail(email) && UserValidator.validatePassword(password))
-
-			return userDAO.logInUser(email, password);
-
+ 
+		
+			try {
+				if (UserValidator.validateEmail(email) && UserValidator.validatePassword(password))
+				return userDAO.logInUser(email, password);
+			} catch (DAOException | SQLException | InvalidInputException  e) {
+				throw new ServiceException(e.getMessage());
+			}
+		
 		return null;
+
 
 	}
 

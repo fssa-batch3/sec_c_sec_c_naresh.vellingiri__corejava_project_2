@@ -3,6 +3,7 @@ package com.fssa.sharetorise.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import com.fssa.sharetorise.errors.UserValidationErrors;
 import com.fssa.sharetorise.exceptions.DAOException;
 import com.fssa.sharetorise.exceptions.ServiceException;
 import com.fssa.sharetorise.model.User;
@@ -19,34 +20,56 @@ import com.fssa.sharetorise.model.User;
 	 */
 class TestUserService{
 	
+	
+	
 	@Test
-	 void testValidAddUser() {
+	 void testValidAddUser() throws ServiceException{
 
 		 UserService  userService = new UserService();
-		User user = new User();
+			User user = new User("Naresh","v",6383434544l,"naresh2356789@gmail.com","Naresh@2000","Naresh@2000");
 		
+			Assertions.assertTrue(userService.addUser(user));
+		
+	}
+	
+	@Test
+	 void testInValidAddUser() throws ServiceException{
+
+		 UserService  userService = new UserService();
+			User user = new User("Naresh","v",6383434544l,"naresh@gmail.com","Naresh@2000","Naresh@2000");
+			User user1 = new User();
+			
+			System.out.println(user1.toString());
+
+			user1.setFirstName("Naresh");
+			user1.setLastName("v");
+			user1.setPassword("Naresh@2000");
+			user1.setEmail("naresh@gmail.com");
+			user1.setPhoneNumber(6383434544l);
+			user1.setConfirmPassword("Naresh@2000");
+			
+			System.out.println(user1.toString());
 
 		try {
 			Assertions.assertTrue(userService.addUser(user));
-		} catch (ServiceException e) {
-			Assertions.fail(e);
+		} catch (ServiceException | DAOException e) {
+			Assertions.assertEquals("Add User is invalid", e.getMessage());
 		}
 	 }
-	 
+	
+	
+	
+	@Test
+	void testLoginUserInvalid() throws ServiceException {
+		UserService  userService = new UserService();
+		try {
+			userService.login("   ","  ");
+		}
+		catch(ServiceException e) {
+			Assertions.assertEquals(UserValidationErrors.INVALID_EMPTY_EMAIL,e.getMessage());
+		}
+		
+	}
 }
 
-//	@Test
-//	@Order(2)
-//	 void testLogin() {
-//
-//		try {
-//			userService.login("dharun@gmail.com", "1234567890Dh@");
-//			System.out.println("Login success");
-//		} catch (InvalidInputException | DAOException | SQLException e) {
-//			// TODO Auto-generated catch block
-//
-//			Assertions.fail("Login fails");
-//			e.printStackTrace();
-//		}
-//
-//	}
+

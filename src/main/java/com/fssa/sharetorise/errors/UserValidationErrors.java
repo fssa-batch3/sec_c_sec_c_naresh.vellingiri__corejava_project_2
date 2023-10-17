@@ -55,6 +55,7 @@ public class UserValidationErrors {
 		
 		public static final String INVALID_PHONENUMBER = "Invalid Phone number.";
 
-		
+		public static final String INVALID_ID = "Invalid ID.";
+
 		
 }

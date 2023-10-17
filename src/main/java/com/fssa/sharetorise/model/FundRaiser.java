@@ -1,7 +1,6 @@
 package com.fssa.sharetorise.model;
 
 import java.time.LocalDate;
-
 import java.util.List;
 
 /*
@@ -13,21 +12,31 @@ public class FundRaiser {
 
 	private int userId;
 
-	private int fundraiserId;// ===============
+	private int fundraiserId;// 
 
-	private String title;// ===============
+	private String title;// 
 
-	private String description;// ===============
+	private String description;
 
-	private double fundingGoal;// ===============
+	private double fundingGoal;
 
-	private LocalDate fundEndingDate;// ===============
+	private LocalDate fundEndingDate;// 
 
 	private String imageUrl;
 
 	private List<Certificate> certificate;// create set 1-img1;2-img2
 
 	private List<Video> video;
+	
+	private SportsCategories category;
+
+	public SportsCategories getCategory() {
+		return category;
+	}
+
+	public void setCategory(SportsCategories category) {
+		this.category = category;
+	}
 
 	public List<Video> getVideo() {
 		return video;
@@ -116,12 +125,15 @@ public class FundRaiser {
 		this.userId = userId;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "FundRaiser [userId=" + userId + ", fundraiserId=" + fundraiserId + ", title=" + title + ", description="
 				+ description + ", fundingGoal=" + fundingGoal + ", fundEndingDate=" + fundEndingDate + ", imageUrl="
-				+ imageUrl + ", certificate=" + certificate + ", video=" + video + ", raised_amount=" + raised_amount
-				+ "]";
+				+ imageUrl + ", certificate=" + certificate + ", video=" + video + ", category=" + category
+				+ ", raised_amount=" + raised_amount + "]";
 	}
+
+	
 
 }

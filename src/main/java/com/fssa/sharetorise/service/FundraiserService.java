@@ -22,7 +22,7 @@ public class FundraiserService {
 			if (fundraiser.getCertificate().isEmpty() && fundraiser.getVideo().isEmpty()) {
 
 				// call basic DAO Method
-				return dao.createFundraiserWithVideosOnly(fundraiser);
+				return dao.createFundraiserWithNone(fundraiser);
 
 			}
 
@@ -93,6 +93,22 @@ public class FundraiserService {
 		}
 		return false;
 
+	}
+
+	public int countDonationsByFundraiserId(int fundraiserId) {
+
+		return donateFundDao.countDonationsByFundraiserId(fundraiserId);
+	}
+
+	public List<FundRaiser> readAllFundraiserByUserId(int id) throws DAOException {
+
+		return dao.getAllFundraiserByUserId(id);
+	}
+
+	public static void main(String[] args) {
+		FundraiserService fundraiserService = new FundraiserService();
+
+		System.out.println(fundraiserService.readAllFundraiserByUserId(1));
 	}
 
 }
